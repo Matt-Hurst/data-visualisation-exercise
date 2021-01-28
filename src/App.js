@@ -5,7 +5,7 @@ import './App.css';
 function App() {
   const GET_POSTS_AND_AUTHORS = gql`
     {
-      allPosts(count: 1000) {
+      allPosts(count: 10000) {
         author {
           id
           lastName
@@ -22,8 +22,7 @@ function App() {
 
   const { loading, error, data } = useQuery(GET_POSTS_AND_AUTHORS);
   if(error) console.log(error)
-  if(loading) return <h1>LOADING</h1>
-  if(data) console.log(data)
+  if(loading) return <h1>LOADING...</h1>
 
   return (
     <div className="App">
