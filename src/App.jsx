@@ -2,7 +2,7 @@ import { gql, useQuery } from '@apollo/client';
 import { Report } from './components/Report';
 
 import './App.css';
-function App() {
+const App = () => {
   const GET_POSTS_AND_AUTHORS = gql`
     {
       allPosts(count: 10000) {

@@ -28,6 +28,11 @@ const LineGraph = ({posts}) => {
     domain: [0, dataMax + (dataMax / 3)],
   });
 
+  const labelProps = {
+    fontSize: 15,
+    fontWeight: 'bold',
+  }
+
   return (
     <div>
       <svg width={width} height={height}>
@@ -38,7 +43,7 @@ const LineGraph = ({posts}) => {
           yScale={yScale}
           x={d => xScale(xSelector(d))}
           y={d => yScale(ySelector(d))}
-          strokeWidth={5}
+          strokeWidth={4}
           stroke="#000"
           strokeLinecap="round"
           fill="transparent"
@@ -48,16 +53,12 @@ const LineGraph = ({posts}) => {
           scale={yScale}
           label={'Posts per month'}
           labelOffset={30}
-          labelProps={{
-            fontSize: 15,
-          }}
+          labelProps={labelProps}
         />
         <AxisBottom
           label={'Months of the year'}
           labelOffset={20}
-          labelProps={{
-            fontSize: 15,
-          }}
+          labelProps={labelProps}
           top={yMax}
           scale={xScale}
           tickFormat={d => d.slice(5)}
