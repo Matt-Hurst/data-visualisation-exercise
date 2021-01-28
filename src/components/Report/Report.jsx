@@ -27,7 +27,7 @@ const Report = ({authors, posts}) => {
     })
     return monthNames.map((month, i) => {
       return {
-        month,
+        date: `2019 ${month}`,
         posts: resultObj[i]
       }
     })
