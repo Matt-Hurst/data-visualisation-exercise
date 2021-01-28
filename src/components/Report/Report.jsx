@@ -1,5 +1,6 @@
 import React from 'react';
 import { gql, useQuery } from '@apollo/client';
+import { LineGraph } from '../LineGraph';
 
 const Report = () => {
 
@@ -28,6 +29,7 @@ const Report = () => {
   return (
     <div>
       <h2>Report</h2>
+      {data && <LineGraph authors={data.allUsers} posts={data.allPosts}/>}
     </div>
   )
 }
