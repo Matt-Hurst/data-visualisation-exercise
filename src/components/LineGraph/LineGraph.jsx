@@ -2,27 +2,22 @@ import React from 'react';
 import { scaleTime, scaleLinear, scaleBand } from "@vx/scale";
 import { extent, max } from "d3-array";
 import { LinePath } from "@vx/shape";
-import { AxisBottom } from '@vx/axis';
+import { AxisBottom, AxisLeft } from '@vx/axis';
 
 
 const LineGraph = ({posts}) => {
   console.log('LineGraph',posts)
 
-  const width = 750;
+  const width = 900;
   const height = 500;
   
-  const padding = 50;
+  const padding = 80;
   const xMax = width - padding;
   const yMax = height - padding;
   
   const xSelector = d => d.date;
   const ySelector = d => d.posts;
 
-  //TODO: WHERE ISSUE LIES?
-  // const xScale = scaleTime({
-  //   range: [padding, xMax],
-  //   domain: extent(posts, xSelector),
-  // });
   const xScale = scaleBand({
     range: [padding, xMax],
     domain: posts.map(xSelector),
@@ -50,11 +45,26 @@ const LineGraph = ({posts}) => {
           strokeLinecap="round"
           fill="transparent"
         />
+        <AxisLeft 
+          left={padding}
+          scale={yScale}
+          // hideTicks={true}
+          label={'Posts per month'}
+          labelOffset={30}
+          labelProps={{
+            fontSize: 15,
+          }}
+        />
         <AxisBottom
+          label={'Months of the year'}
+          labelOffset={20}
+          labelProps={{
+            fontSize: 15,
+          }}
           top={yMax}
           scale={xScale}
           tickFormat={d => d.slice(5)}
-          hideTicks={true}
+          // hideTicks={true}
           stroke={'black'}
           tickStroke={'black'}
           tickLabelProps={() => ({
