@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { LineGraph } from '../LineGraph';
+import './Report.css'
 
 const Report = ({authors, posts}) => {
   const [allAuthors, setAllAuthors] = useState([])
@@ -14,11 +15,10 @@ const Report = ({authors, posts}) => {
   
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   
-  // filter posts by author
-  const filteredPostByAuthor = authorId => posts.filter(post => post.author.id === authorId);
+  const filterPostByAuthor = authorId => posts.filter(post => post.author.id === authorId);
   
-  // make array of objects [{date: 'Jan', posts: 4}, {date: 'Feb', posts: 2}]
-  const cleanedPostsData = posts => {
+  // make array of objects [{date: '2019 Jan', posts: 4}, {date: '2019 Feb', posts: 2}]
+  const makeGraphData = posts => {
     const resultObj = {}
     posts.forEach(post => {
       const date = new Date(+post.createdAt).getMonth()
@@ -34,14 +34,17 @@ const Report = ({authors, posts}) => {
   }
 
   return (
-    <div>
-      <h2>Report</h2>
-      <select onChange={handleChange}>
-        {authors.map((author, i) => {
-          return <option value={i} key={i+author.id}>{author.lastName}</option>
-        })}
-      </select>
-      {posts && <LineGraph posts={cleanedPostsData(filteredPostByAuthor(author ? author.id : authors[0].id))} />}
+    <div className="report-grand-wrapper">
+      <h2>Authors Posting Frequency By Month Report</h2>
+      <div className="report-select-div">
+        <h3>Select author:</h3>
+        <select className="report-selector-element" onChange={handleChange}>
+          {authors.map((author, i) => {
+            return <option value={i} key={i+author.id}>{author.lastName}</option>
+          })}
+        </select>
+      </div>
+      {posts && <LineGraph posts={makeGraphData(filterPostByAuthor(author ? author.id : authors[0].id))} />}
     </div>
   )
 }
