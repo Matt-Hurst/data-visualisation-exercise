@@ -1,13 +1,11 @@
 import React from 'react';
-import { scaleTime, scaleLinear, scaleBand } from "@vx/scale";
-import { extent, max } from "d3-array";
+import { scaleLinear, scaleBand } from "@vx/scale";
+import { max } from "d3-array";
 import { LinePath } from "@vx/shape";
 import { AxisBottom, AxisLeft } from '@vx/axis';
 
 
 const LineGraph = ({posts}) => {
-  console.log('LineGraph',posts)
-
   const width = 900;
   const height = 500;
   
@@ -48,7 +46,6 @@ const LineGraph = ({posts}) => {
         <AxisLeft 
           left={padding}
           scale={yScale}
-          // hideTicks={true}
           label={'Posts per month'}
           labelOffset={30}
           labelProps={{
@@ -64,7 +61,6 @@ const LineGraph = ({posts}) => {
           top={yMax}
           scale={xScale}
           tickFormat={d => d.slice(5)}
-          // hideTicks={true}
           stroke={'black'}
           tickStroke={'black'}
           tickLabelProps={() => ({
